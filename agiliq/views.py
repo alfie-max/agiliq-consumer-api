@@ -28,3 +28,14 @@ def callback():
 
     if current_state != state or not code:
         abort(403) # Forbidden
+
+    params = {'client_id'     : client_id,
+              'client_secret' : client_secret,
+              'code'          : code,
+              'redirect_uri'  : redirect_uri
+    }
+    headers = {'accept':'application/json'}
+
+    req = requests.post(token_url, params=params, headers=headers)
+    if not req.ok:
+        abort(403) # Forbidden
