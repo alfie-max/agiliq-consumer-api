@@ -1,7 +1,7 @@
 import uuid
 import requests
 from agiliq import app
-from flask import redirect
+from flask import redirect, request, abort
 
 
 client_id     = 'jpW1SVD4wdyvViEX1gb7mjTitnxnDWKLGu8BXhbrZnLB63khYm'
@@ -23,4 +23,8 @@ def index():
 
 @app.route('/oauth/callback', methods=['GET', 'POST'])
 def callback():
-    return "Callback URL"
+    current_state = request.args.get('state')
+    code = request.args.get('code')
+
+    if current_state != state or not code:
+        abort(403) # Forbidden
