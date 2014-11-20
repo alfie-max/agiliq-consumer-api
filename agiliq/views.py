@@ -3,6 +3,7 @@ import requests
 from agiliq import app
 from flask import redirect
 
+
 client_id     = 'jpW1SVD4wdyvViEX1gb7mjTitnxnDWKLGu8BXhbrZnLB63khYm'
 client_secret = 'IMKbub1eKLnkbRatVGxrMZQMYJBY8IFic14Ls82n4LY7318i2C'
 redirect_uri  = 'http://127.0.0.1:5000/oauth/callback'
@@ -16,5 +17,10 @@ def index():
               'state'        : state,
               'redirect_uri' : redirect_uri
     }
+
     req = requests.Request('GET', url=auth_url, params=params).prepare()
     return redirect(req.url)
+
+@app.route('/oauth/callback', methods=['GET', 'POST'])
+def callback():
+    return "Callback URL"
