@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h2>Upload Resume</h2>
+
+  <form action="http://join.agiliq.com/api/resume/upload/?access_token={{access_token}}" method=post name="upload" enctype=multipart/form-data>
+ 
+    {{ form.first_name.label }}
+    {{ form.first_name }}
+ 
+    {{ form.last_name.label }}
+    {{ form.last_name }}
+	
+    {{ form.projects_url.label }}
+    {{ form.projects_url }}
+    
+    {{ form.code_url.label }}
+    {{ form.code_url }}
+ 
+    {{ form.resume.label }}
+    {{ form.resume }}
+ 
+    {{ form.submit }}
+  </form>
+
+{% endblock %}
