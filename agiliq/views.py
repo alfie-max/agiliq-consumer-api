@@ -1,7 +1,8 @@
 import uuid
 import requests
 from agiliq import app
-from flask import redirect, request, abort
+from forms import ResumeForm
+from flask import redirect, request, abort, render_template
 
 
 client_id     = 'jpW1SVD4wdyvViEX1gb7mjTitnxnDWKLGu8BXhbrZnLB63khYm'
@@ -39,3 +40,9 @@ def callback():
     req = requests.post(token_url, params=params, headers=headers)
     if not req.ok:
         abort(403) # Forbidden
+
+    data = req.json()
+    access_token = data['access_token']
+    form = ResumeForm()
+
+    return render_template('upload.html', form=form, access_token=access_token)
